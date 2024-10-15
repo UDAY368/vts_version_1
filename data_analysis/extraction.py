@@ -5,6 +5,7 @@ import statistics
 import ast
 import pandas as pd
 from collections import defaultdict
+from default_values.constants import trade_size
 
 
 def get_time_data(ct_time, csv_file):
@@ -2895,7 +2896,7 @@ def get_last_3_swings_info_rankings(last_3_swings_info):
         return [0, 0]
 
 
-def best_swing_per_rankings(layer_1_data):
+def best_swing_per_rankings(layer_1_data, all_coin_price_lst):
     # Get the last 3 swings info from the coin
     last_three_swing_excel_lst = []
     for coin in layer_1_data:
@@ -2917,6 +2918,20 @@ def best_swing_per_rankings(layer_1_data):
     for index, coin in enumerate(sort_last_s_excel_lst):
         coin.insert(0, index+1)
     print("sort_last_s_excel_lst ==>", sort_last_s_excel_lst)
+
+    # Add the coin price code
+    modified_all_coin_price_lst = []
+    for coin in all_coin_price_lst:
+        coin_name = coin[0]
+        coin_price = coin[-1]
+        coin_info = [coin_name, coin_price]
+        modified_all_coin_price_lst.append(coin_info)
+
+    for sort_coin in sort_last_s_excel_lst:
+        for price_coin in modified_all_coin_price_lst:
+            if price_coin[0] == sort_coin[1]:
+                sort_coin.append(price_coin[1])
+                sort_coin.append(round(trade_size/price_coin[1], 1))
 
     sort_last_3_s_excel_lst = sorted(
         last_3_swing_excel_ranks, key=lambda x: x[2], reverse=True)

@@ -2,7 +2,7 @@ from utils.json_ops import load_json_from_file
 default_values_file_path = 'default_values\default_values.json'
 # Read the Json File
 stored_default_value_dict = load_json_from_file(default_values_file_path)
-
+trade_size = 100
 
 if not stored_default_value_dict:
     pass

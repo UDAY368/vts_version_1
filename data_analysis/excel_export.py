@@ -311,7 +311,7 @@ def layer_3_rank_excel_export(layer_3_str_info_excel_lst, layer_3_rank_1_excel_l
 
     # Column Names
     sort_last_s_excel_col_names = ["rank", "coin_name", "coin_tf", "last_S_info",
-                                   "last_S_dir", "last_S_per", "last_s_rand_per", "last_s_time"]
+                                   "last_S_dir", "last_S_per", "last_s_rand_per", "last_s_time", "coin_price", "coin_quantity"]
 
     sort_last_3_s_excel_col_names = ["rank", "coin_name", "coin_tf", "S_3_score", "S_3_per_sum",
                                      "S_3_per_avg", "last_S_info", "swing_2_info", "swing_3_info", "S_3_rand_sum", "S_3_rand_avg"]
@@ -484,7 +484,7 @@ def layer_3_rank_excel_export(layer_3_str_info_excel_lst, layer_3_rank_1_excel_l
             elif sheet_name == "s_per_rank":
                 df.to_excel(writer, sheet_name=sheet_name, index=False,
                             header=["Rank", "coin_name", "coin_tf", "last_S_info",
-                                    "last_S_dir", "last_S_per", "last_s_rand_per", "last_s_time"],
+                                    "last_S_dir", "last_S_per", "last_s_rand_per", "last_s_time", "coin_price", "coin_quantity"],
                             engine='openpyxl')
                 worksheet = writer.sheets[sheet_name]
                 for idx, col in enumerate(df):

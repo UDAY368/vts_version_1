@@ -212,7 +212,7 @@ def analyse_excel_data(
             auto_download_excel_path)
 
         # Function calls
-        layer_1_data, fb_coin_lst, fb_excel_lst = layer_1_analysis(
+        layer_1_data, fb_coin_lst, fb_excel_lst, all_coin_price_lst = layer_1_analysis(
             auto_download_excel_path)
 
         swing_per_analysis_excel_lst, swing_pstv_per_range_excel_lst, swing_neg_per_range_excel_lst, swing_rand_per_analysis_excel_lst, swing_zero_rand_per_cluster_excel_lst, swing_pstv_rand_per_cluster_excel_lst, swing_neg_rand_per_cluster_excel_lst, swing_time_analysis_excel_lst, swing_rsi_diff_analysis_excel_lst, swing_fb_analysis_excel_lst = layer_2_analysis(
@@ -225,7 +225,7 @@ def analyse_excel_data(
             layer_3_rank_1_col_weights, layer_3_rank_2_col_weights, layer_3_rank_3_col_weights, layer_3_rank_4_col_weights, layer_3_rank_5_col_weights, layer_3_rank_6_col_weights, layer_3_rank_1_col_names, layer_3_rank_2_col_names, layer_3_rank_3_col_names, layer_3_rank_4_col_names, layer_3_rank_5_col_names, layer_3_rank_6_col_names, layer_3_rank_1_excel_lst, layer_3_rank_2_excel_lst, layer_3_rank_3_excel_lst, layer_3_rank_4_excel_lst, layer_3_rank_5_excel_lst, layer_3_rank_6_excel_lst)
 
         sort_last_s_excel_lst, sort_last_3_s_excel_lst = best_swing_per_rankings(
-            layer_1_data)
+            layer_1_data, all_coin_price_lst)
 
         # # Layer_1 and Layer_2 excel export
         layer_1_2_excel_export(layer_1_data, fb_excel_lst, output_excel_folder_path, Choose_Time_Frame, swing_per_analysis_excel_lst, swing_pstv_per_range_excel_lst, swing_neg_per_range_excel_lst, swing_rand_per_analysis_excel_lst,
@@ -284,7 +284,7 @@ def set_auto_alerts(
 
 @app.get("/btc_swing_info/", tags=["Trading Analysis"])
 def get_btc_last_3_swings_():
-    btc_layer_1_data, btc_fb_lst, btc_fb_excel_lst = layer_1_analysis(
+    btc_layer_1_data, btc_fb_lst, btc_fb_excel_lst, all_coin_price_lst = layer_1_analysis(
         btc_excel_folder_path)
     btc_last_three_swing_excel_lst = btc_last_swing_info(btc_layer_1_data)
     btc_last_3_swings = get_btc_last_3_swings_info(

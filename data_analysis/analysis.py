@@ -11,6 +11,7 @@ def layer_1_analysis(auto_download_excel_path):
     layer_1_data_lst = []
     fb_coin_wise_lst = []
     fb_excel_lst = []
+    all_coin_price_lst = []
     for csv_file in csv_files[0]:
         read_csv_status, df = read_validate_csv_file(
             auto_download_excel_path, csv_file)
@@ -60,12 +61,16 @@ def layer_1_analysis(auto_download_excel_path):
                 item for item in swing_change_rows_lst if item not in false_breakout_lst]
 
             swing_info_lst = []
+            coin_price_lst = [coin_name]
             for i in range(len(swing_lst) - 1):
                 # Swing_1 info
                 row_1 = df.iloc[swing_lst[i][0]]
                 swing_1_col = swing_lst[i][1]
                 swing_1_ISO_time = get_time_data(row_1["time"], csv_file)
                 swing_1_RSI = round(row_1["Plot"], 2)
+
+                # Coin Price
+                coin_price = row_1["high"]
 
                 # Swing_2 info
                 row_2 = df.iloc[swing_lst[i+1][0]]
@@ -95,14 +100,16 @@ def layer_1_analysis(auto_download_excel_path):
                 swing_info = [coin_name, coin_time_frame, swing_1_col, swing_2_col, swing_dir, swing_per, swing_rand_per,
                               swing_time, swing_candles, swing_1_RSI, swing_2_RSI, swing_rsi_diff, swing_1_ISO_time, swing_2_ISO_time]
                 swing_info_lst.append(swing_info)
+                coin_price_lst.append(coin_price)
             layer_1_data_lst.append(swing_info_lst)
             fb_coin_wise_lst.append(fb_overall_info_lst)
             fb_excel_lst.append(fb_lst_with_time)
+            all_coin_price_lst.append(coin_price_lst)
     end_time = time.time()
     total_time_for_analysis = round(((end_time - start_time)/60), 2)
     print(f"Total Time Taken for analysis is : {total_time_for_analysis} Min")
     print("========= Layer_1 Analysis Successful ==========")
-    return layer_1_data_lst, fb_coin_wise_lst, fb_excel_lst
+    return layer_1_data_lst, fb_coin_wise_lst, fb_excel_lst, all_coin_price_lst
 
 
 def layer_2_analysis(layer_1_data, fb_coin_lst):
