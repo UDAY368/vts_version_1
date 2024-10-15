@@ -1,0 +1,21 @@
+Step to execute the function
+1) Download the VS Code
+2) Download the python extensions and related extensions
+3) copy the code
+4) set up the default software path in API
+5) Setup the python environment
+    - go to command palette (control + shift + p)
+    - create python environment
+    - select venv
+    - choose microsoft python version
+    - select the requirements.txt file as dependencies
+    - press ok
+6) install requirements.txt file 
+    >>>pip install -r requirements.txt
+7) to freeze the requirements need to use this command
+    >>> pip freeze > requirements.txt
+8) run the fast api serve 
+    >>> uvicorn main:app --reload
+9) open browser and enter the url
+    >>> http://127.0.0.1:8000/docs
+10) Please fallow the VTS software Documentation
